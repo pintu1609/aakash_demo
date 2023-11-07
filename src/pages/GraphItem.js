@@ -24,7 +24,7 @@ const [visitorData, setVisitorData] = useState([])
 
         // api Call for area line graph
         try{
-        const response = await fetch("https://mocki.io/v1/25531559-3115-4a6f-9c86-dcaef04c8722", {
+        const response = await fetch("https://mocki.io/v1/09199a38-be9f-4de1-b34d-0face48cdb89", {
          method: "GET", 
           
          headers: {
@@ -98,7 +98,7 @@ const [visitorData, setVisitorData] = useState([])
 
         // api Call line graph
         try{
-        const response = await fetch("https://mocki.io/v1/e2db7f51-665c-4edb-ae50-c39e92111ed2", {
+        const response = await fetch("https://mocki.io/v1/1435f43c-cdfb-4b25-9cc5-5824fc929568", {
          method: "GET", 
           
          headers: {
@@ -226,10 +226,10 @@ const [visitorData, setVisitorData] = useState([])
         >
           <CartesianGrid stroke="#1f2949" horizontal={true} vertical={false} />
           <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false}/>
-          <YAxis stroke='#a9b4dc' axisLine={false}  />
+          <YAxis stroke='#a9b4dc' axisLine={false} tickFormatter={(value) => `${value / 1000}K`}   />
           <Tooltip content={<CustomTooltip />}  />
           <Area type="monotone" dataKey="expenses" stackId="1" stroke="#51b4f0" fill="#152244" />
-          <Area type="monotone" dataKey="revenue" stackId="1" stroke="#6168e8" fill="#1d2655" />
+          <Area type="monotone" dataKey="revenue" stackId="2" stroke="#6168e8" fill="#1d2655" />
           
         </AreaChart>
        
@@ -270,8 +270,8 @@ const [visitorData, setVisitorData] = useState([])
                                     >
                                     <CartesianGrid stroke="#1f2949" horizontal={true} vertical={false} />
                                     
-                                    <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false}/>
-                                    {/* <YAxis stroke='#a9b4dc' axisLine={false}/> */}
+                                    <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false} interval={3}/>
+                                    <YAxis stroke='#a9b4dc' axisLine={false} tick={{ display: 'none' }}/>
                                    
                                     <Bar dataKey="pv" fill="#6c72ff" activeBar={<Rectangle fill="pink" stroke="blue" />} />
                                     <Bar dataKey="uv" fill="#54bff9" activeBar={<Rectangle fill="gold" stroke="purple" />} />
@@ -331,9 +331,9 @@ const [visitorData, setVisitorData] = useState([])
                                         }}
                                         >
                                         <CartesianGrid strokeDasharray="3 3" stroke="#1f2949" horizontal={false} vertical={true}  />
-                                        <CartesianGrid stroke="#1f2949" vertical={false} horizontal={true} />
-                                        <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false}/>
-                                        <YAxis stroke='#a9b4dc' axisLine={false} />
+                                       
+                                        <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false} interval={7}/>
+                                        <YAxis stroke='#a9b4dc' axisLine={false} ticks={[0, 250, 500]}  />
                                         {/* <Tooltip /> */}
                                         {/* <Legend /> */}
                                         <Line type="monotone" dataKey="people" stroke="#5b61d8" />         
