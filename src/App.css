@@ -1,0 +1,10 @@
+.butt {
+    background:  #153b41;
+    color: #18ca74;
+    font-size: 8px;
+    padding: 1px 3px;
+    height: fit-content;
+    border-radius: 2px;
+    border: 1px solid  #153b41;
+    cursor: pointer;
+}
