@@ -189,8 +189,8 @@ const [visitorData, setVisitorData] = useState([])
             <div style={{ borderRadius: '5px', background: '#101935', padding: '10px 20px', height: '90px', border: '1px solid #1f294a' }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <p style={{ color: '#ffffff', marginBottom: '0px' }}> {pv}</p>
-                <h5 style={{ color: '#ffffff', marginBottom: '0px' }}>{name}</h5>
                 <p style={{ color: '#ffffff', marginBottom: '0px' }}> {uv}</p>
+                <p style={{color:'#475171', textAlign:'center', }}>{` ${name}`}</p>
               </div>
             </div>
           );
