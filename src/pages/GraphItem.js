@@ -130,23 +130,32 @@ const [visitorData, setVisitorData] = useState([])
       }, []);
       
 
-
+        
       const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
-          const data = payload[0].payload; // Get the specific payload data
+          const currentPayload = payload[0];
+          const { name, expenses, revenue } = currentPayload.payload;
           return (
-            <div className="custom-tooltip" style={{borderRadius:'5px', background:'#101935', padding:'10px 20px', height:'70px', border:'1px solid #1f294a'}}>
+            <div className="custom-tooltip" style={{borderRadius:'5px', background:'#101935', padding:'10px 20px', height:'80px', border:'1px solid #1f294a'}}>
               <div className='d-flex flex-column' >
 
               <div className='d-flex flex-row align-items-center' >
-                        <h6 style={{color:'#ffffff', marginBottom:'0px'}}>
-                       $ {` ${data.amt}`}
+                <div className='d-flex flex-column'>
+
+               
+                        <h6 style={{color:'#51b4f0', marginBottom:'0px'}}>
+                       $ {` ${expenses}`}
 
                         </h6>
+                        <h6 style={{color:'#6168e8', marginBottom:'0px'}}>
+                       $ {` ${revenue}`}
+
+                        </h6>
+                     </div>
                         <button type="button" className="butt mx-2 d-flex align-items-center " >24.8% <i className="fa-solid fa-arrow-down fa-rotate-180 mx-1" style={{color: '#18ca74'}}></i> </button>
                     </div>
 
-              <p style={{color:'#475171', textAlign:'center', }}>{` ${data.name}`}</p>
+              <p style={{color:'#475171', textAlign:'center', }}>{` ${name}`}</p>
               </div>
             </div>
           );
@@ -156,8 +165,40 @@ const [visitorData, setVisitorData] = useState([])
       };
       
       
+      const CustTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+          const currentPayload = payload[0];
+          const { name, people } = currentPayload.payload;
       
+          return (
+            <div  style={{borderRadius:'5px', background:'#101935', padding:'10px 20px', height:'70px', border:'1px solid #1f294a'}}>
+              <p style={{color:'#ffffff', marginBottom:'0px'}}> {` ${people}`} Peoples</p>
+              <p style={{color:'#475171', textAlign:'center', marginBottom:'0px', fontWeight:'bold'}}> {name}</p>
+            </div>
+          );
+        }
+        return null;
+      };
       
+      const Cust1Tooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+          const currentPayload = payload[0];
+          const { name, pv, uv } = currentPayload.payload;
+      
+          return (
+            <div style={{ borderRadius: '5px', background: '#101935', padding: '10px 20px', height: '90px', border: '1px solid #1f294a' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <p style={{ color: '#ffffff', marginBottom: '0px' }}> {pv}</p>
+                <h5 style={{ color: '#ffffff', marginBottom: '0px' }}>{name}</h5>
+                <p style={{ color: '#ffffff', marginBottom: '0px' }}> {uv}</p>
+              </div>
+            </div>
+          );
+        }
+        return null;
+      };
+      
+      // Your BarChart setup using ResponsiveContainer and other props...
       
       
       
@@ -272,7 +313,7 @@ const [visitorData, setVisitorData] = useState([])
                                     
                                     <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false} interval={3}/>
                                     <YAxis stroke='#a9b4dc' axisLine={false} tick={{ display: 'none' }}/>
-                                   
+                                    <Tooltip content={<Cust1Tooltip  />}  />
                                     <Bar dataKey="pv" fill="#6c72ff" activeBar={<Rectangle fill="pink" stroke="blue" />} />
                                     <Bar dataKey="uv" fill="#54bff9" activeBar={<Rectangle fill="gold" stroke="purple" />} />
                                     </BarChart>
@@ -315,7 +356,7 @@ const [visitorData, setVisitorData] = useState([])
                                     <button type="button" className="butt mx-2 d-flex align-items-center " >16.8% <i className="fa-solid fa-arrow-down fa-rotate-180 mx-1" style={{color: '#18ca74'}}></i> </button>
                                 </div>
                             </div>
-                            <div style={{height:'130px', padding:'10px 0'}}>
+                            <div style={{height:'130px', padding:'8px 0'}}>
                                 
 
                                     <ResponsiveContainer width="100%" height="100%">
@@ -333,10 +374,10 @@ const [visitorData, setVisitorData] = useState([])
                                         <CartesianGrid strokeDasharray="3 3" stroke="#1f2949" horizontal={false} vertical={true}  />
                                        
                                         <XAxis dataKey="name" stroke='#a9b4dc' axisLine={false} interval={7}/>
-                                        <YAxis stroke='#a9b4dc' axisLine={false} ticks={[0, 250, 500]}  />
-                                        {/* <Tooltip /> */}
+                                        <YAxis stroke='#a9b4dc' axisLine={false} domain={[0, 500]} ticks={[0, 250,500]}  />
+                                        <Tooltip content={<CustTooltip />}  />
                                         {/* <Legend /> */}
-                                        <Line type="monotone" dataKey="people" stroke="#5b61d8" />         
+                                        <Line type="monotone" dataKey="people" stroke="#5b61d8" dot={false}/>         
                                         </LineChart>
                                     </ResponsiveContainer>
 
